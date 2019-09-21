@@ -1,0 +1,22 @@
+<?xml-stylesheet href="directory/xsltforms.xsl" type="text/xsl"?>
+<html xmlns="https://www.w3.org/1999/xhtml"
+      xmlns:ev="https://www.w3.org/2001/xml-events">
+<head>
+   <title></title>
+   <style type="text/css">
+      add your styling here
+   </style>
+   <model xmlns="https://www.w3.org/2002/xforms">
+      <instance>
+         <data xmlns="">
+            add your data here
+         </data>
+      </instance>
+   </model>
+</head>
+<body>
+   <group xmlns="https://www.w3.org/2002/xforms">
+      add your controls here
+   </group>
+</body>
+</html>

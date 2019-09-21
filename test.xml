@@ -1,0 +1,27 @@
+<?xml-stylesheet href="xsltforms-1.3/xsltforms.xsl" type="text/xsl"?>
+<?xsltforms-options debug="yes"?>
+<html xmlns="https://www.w3.org/1999/xhtml"
+      xmlns:xf="http://www.w3.org/2002/xforms"
+      xmlns:ev="https://www.w3.org/2001/xml-events">
+<head>
+   <title>XForms textarea</title>
+   <style type="text/css">
+	   <!--add your styling here-->
+   </style>
+   <model xmlns="https://www.w3.org/2002/xforms">
+      <instance>
+         <data xmlns="">
+	   <!--add your data here-->
+           <MyTextValue />
+         </data>
+      </instance>
+   </model>
+</head>
+<body>
+  <group xmlns="https://www.w3.org/2002/xforms">
+     <xf:textarea ref="MyTextValue">
+        <xf:label>Note:</xf:label>
+     </xf:textarea>
+   </group>
+</body>
+</html>
