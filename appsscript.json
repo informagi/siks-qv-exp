@@ -1,0 +1,14 @@
+{
+  "timeZone": "America/New_York",
+  "dependencies": {
+    "enabledAdvancedServices": []
+  },
+  "exceptionLogging": "STACKDRIVER",
+  "executionApi": {
+    "access": "ANYONE"
+  },
+  "oauthScopes": [
+      "https://www.googleapis.com/auth/forms",
+      "https://www.googleapis.com/auth/script.external_request"
+  ]
+}
