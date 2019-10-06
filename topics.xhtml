@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<?xml-stylesheet href="xsltforms-1.3/xsltforms/xsltforms.xsl" type="text/xsl"?>
+<?xsltforms-options debug="yes"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:xf="http://www.w3.org/2002/xforms"
+      xmlns:ev="http://www.w3.org/2001/xml-events">
+<head>
+  <title>SIKS Experiment</title>
+  <style type="text/css">
+     body {margin-left: 10ex; font-family: sans-serif}
+     .title {font-weight: bold}
+     .author {font-style: italic; color: red}
+     .entry {margin: 1ex}
+     .h1 {font-size: 150%; margin-bottom: 1ex; margin-left: -5ex}
+     .h2 {font-size: 125%; margin-left: -3ex}
+     .h3 {font-size: 110%; margin-left: -3ex}
+     .p {display: block; margin-bottom: 1ex; color: blue}
+     .btn {display: block-inline; background-color: green; color: white; margin-left: 0.5ex}
+  </style>
+  <xf:model>
+    <xf:instance id="topics" src="data/topics.xml"/>
+    <xf:submission method="put" action="data/topics.xml" replace="none"/>
+    <xf:instance>
+      <MyTextValue />
+    </xf:instance>
+    <xf:instance id="qv-template">
+      <variants xmlns="">
+        <v><title></title></v>
+      </variants>
+    </xf:instance>
+  </xf:model>
+</head>
+<body>
+  <xf:group xmlns="http://www.w3.org/2002/xforms">
+    <group ref="instance('topics')">
+      <label class="h2">Topics <output ref="@source"/></label>
+      <repeat ref="top" id="top-repeat">
+	<label class="h3">Topic <output ref="num/text()" /></label>
+	<label class="p">
+	  <output ref="title"><label>Title:</label></output>
+	</label>
+	<label class="p">
+	  <output ref="desc" />
+	</label>
+	<insert nodeset="variants" position="after" at="index('top-repeat')" />
+	<repeat ref="variants/v">
+	  <input ref="title">
+	    <label>Variant:</label>
+	    <xf:hint>Type your query variant</xf:hint>
+	  </input>
+	  <switch>
+	    <case id="showVariant">
+	      <trigger appearance="minimal">
+		<label ref="variant"/>
+		<toggle case="editVariant" ev:event="DOMActivate"/>
+	      </trigger>
+	    </case>
+	    <case id="editVariant">
+	      <input ref="title">
+		<label>Title:</label>
+		<toggle case="showName" ev:event="DOMFocusOut"/>
+	      </input>
+	    </case>
+	  </switch>
+	  <trigger appearance="minimal">
+	    <label class="btn">X</label>
+	    <delete ev:event="DOMActivate" nodeset="." at="1" />
+	  </trigger>
+	</repeat>
+	<!-- <label class="p"><output ref="narr" /></label> --><!-- switch! -->
+	<trigger appearance="minimal">
+	  <label class="btn">New</label>
+	  <action ev:event="DOMActivate">
+	    <insert nodeset="v" context="variants" origin="instance('qv-template')//v"
+		    position="after" at="count(v)" />
+	    <!--<setvalue ref="v[last()]/title" />-->
+	  </action>
+	</trigger>
+	<!--<label class="p">End of topic</label>-->
+      </repeat>
+    </group>
+  </xf:group>
+<!--
+  <xf:textarea ref="MyTextValue">
+    <xf:label>XForms TA:</xf:label>
+  </xf:textarea>
+-->
+</body>
+</html>  
+
+<!--
+	    <group class="entry">
+	       <output class="title" ref="title"/>
+	       <repeat ref="author">
+		  <output class="author" ref="."/>
+	       </repeat>
+	       <trigger ref="abstract">
+		  <label>Abstract</label>
+		  <action ev:event="DOMActivate">
+		     <toggle case="show"/>
+		  </action>
+	       </trigger>
+	       <switch>
+		  <case id="hide"/>
+		  <case id="show">
+		     <group class="abstract" ref="abstract">
+			<trigger>
+			   <label>×</label>
+			   <action ev:event="DOMActivate">
+			      <toggle case="hide"/>
+			   </action>
+			</trigger>
+			<repeat ref="p">
+			   <output class="p" ref="."/>
+			</repeat>
+		     </group>
+		  </case>
+	       </switch>
+	    </group>
+-->
